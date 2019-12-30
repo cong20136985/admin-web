@@ -1,0 +1,25 @@
+[{
+    "id":1,
+    "name":"cong vuong",
+    "diachi": "do luong",
+    "quyen":1
+},
+{
+    "id":2,
+    "name":"Cong phuong",
+    "diachi": "do luong",
+    "quyen":2
+},
+{
+    "id":3,
+    "name":"cong vuong",
+    "diachi": "do luong",
+    "quyen":3
+},
+{
+    "id":4,
+    "name":"cong vuong",
+    "diachi": "do luong",
+    "quyen":3
+}
+]
