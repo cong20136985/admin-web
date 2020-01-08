@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 class Table extends Component {
     showTable = () =>  this.props.dulieu.map((value, index) => (
             <tr key={index}>
-        <td scope="row">{value.id}</td>
+        <td scope="row">{index}</td>
                 <td>{value.name}</td>
                 <td>{value.diachi}</td>
                 <td>{this.showpermission(value.quyen)}</td>
                 <td>
                     <div className="btn-group">
-                        <div className="btn btn-warning sua">
+                        <div onClick={(user)=>this.props.edit(value)} className="btn btn-warning sua">
                             <i className="fa fa-edit    " /> Sua
 </div>
                         <div className="btn btn-danger xoa">
@@ -22,11 +22,11 @@ class Table extends Component {
 
         
     showpermission = (ind) => {
-        if(ind === 1) {
+        if(ind == 1) {
             return "Admin"
-        } else if(ind === 2) {
+        } else if(ind == 2) {
             return "Custumer"
-        } else if(ind === 3){
+        } else if(ind == 3){
             return "normar user"
         }
 

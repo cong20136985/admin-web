@@ -6,6 +6,7 @@ import Table from './Table';
 import AddForm from './AddForm';
 import DataUser from './data.json';
 
+const uuidv1 = require('uuid/v1');
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class App extends Component {
     this.state={
       trangthai: true,
       data: DataUser,
-      trangThaiChinhsua: true
+      trangThaiChinhsua: true,
+      searchText:''
     }
   }
   
@@ -23,7 +25,51 @@ class App extends Component {
       
     )
   }
+
+  getText = (dl) =>{
+    this.setState({
+      searchText:dl
+    })
+  }
+
+  getUserUpdate = (user) =>{
+    console.log(user);
+    
+  }
+
+  getDataNewUser = (name,diachi,quyen) =>{
+      var item ={};
+      item.id =uuidv1();
+      item.name = name;
+      item.diachi = diachi;
+      item.quyen = quyen;
+
+      var items = this.state.data;
+      items.push(item);
+      this.setState({
+        data:items
+      })
+  }
+
+
   render() {
+
+    const {data, searchText} = this.state;
+    let ketqua;
+    if(searchText !== ''){
+      // data.forEach((item) => {
+      //   if(item.name.indexOf(searchText)!=-1){
+      //     ketqua.push(item);
+      //   }
+      // });
+      ketqua = data.filter((item)=>item.name.indexOf(searchText) !== -1)
+    } else{
+      ketqua = data;
+    }
+    
+
+
+
     //console.log(this.state.data);
     //alert("hello "+ this.state.data[1].name);
     return (
@@ -32,9 +78,10 @@ class App extends Component {
         <div className="searchForm">
           <div className="container">
             <div className="row">
-              <Search ketnoi={()=>this.reverse()} />
-              <Table dulieu = {this.state.data}/>
-              <AddForm trangthai={this.state.trangthai} trangThaiChinhsua = {this.state.trangThaiChinhsua}/>
+              <Search ketnoi={()=>this.reverse()} 
+              chacon={(dl)=>this.getText(dl)} />
+              <Table edit={(user)=>this.getUserUpdate(user)} dulieu={ketqua}/>
+              <AddForm add = {(name,diachi,quyen)=>this.getDataNewUser(name,diachi,quyen)} trangthai={this.state.trangthai} trangThaiChinhsua={this.state.trangThaiChinhsua}/>
             </div>
           </div>
         </div>
