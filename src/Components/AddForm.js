@@ -60,7 +60,7 @@ class AddForm extends Component {
                             </select>
                         </div>
                         <div className="form-group">
-                            <input type="reset" className="btn btn-block btn-primary" onClick={(name,diachi,quyen)=>this.props.add(this.state.name,this.state.diachi,this.state.quyen)} value=" Them moi"/>
+                            <input type="reset" className="btn btn-block btn-primary" onClick={()=>this.props.add(this.state.name,this.state.diachi,this.state.quyen)} value=" Them moi"/>
                         </div>
                     </div>
                     </form>

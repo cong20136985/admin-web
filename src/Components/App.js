@@ -5,6 +5,7 @@ import Search from './Search';
 import Table from './Table';
 import AddForm from './AddForm';
 import DataUser from './data.json';
+import EditForm from './EditForm';
 
 const uuidv1 = require('uuid/v1');
 
@@ -14,14 +15,17 @@ class App extends Component {
     this.state={
       trangthai: true,
       data: DataUser,
-      trangThaiChinhsua: true,
-      searchText:''
+      trangThaiChinhsua: false,
+      searchText:'',
+      userEditObject:{},
+      trangthaisua: false
     }
   }
   
   thongbao = () =>{alert("done!");}
   reverse = () => {
-    this.setState({trangThaiChinhsua : !this.state.trangThaiChinhsua}
+    this.setState({trangThaiChinhsua : !this.state.trangThaiChinhsua
+    }
       
     )
   }
@@ -33,8 +37,12 @@ class App extends Component {
   }
 
   getUserUpdate = (user) =>{
-    console.log(user);
-    
+    // console.log(user);
+    this.setState({
+      userEditObject:user,
+      trangThaiChinhsua : false,
+      trangthaisua: true
+    });
   }
 
   getDataNewUser = (name,diachi,quyen) =>{
@@ -49,6 +57,10 @@ class App extends Component {
       this.setState({
         data:items
       })
+  }
+  handleEditForm = (obj) =>{
+    console.log(obj);
+    
   }
 
 
@@ -71,7 +83,7 @@ class App extends Component {
 
 
     //console.log(this.state.data);
-    //alert("hello "+ this.state.data[1].name);
+    //alert("hello "+ this.state.data[1].name);dfdgf
     return (
       <div >
         <Header />
@@ -81,7 +93,8 @@ class App extends Component {
               <Search ketnoi={()=>this.reverse()} 
               chacon={(dl)=>this.getText(dl)} />
               <Table edit={(user)=>this.getUserUpdate(user)} dulieu={ketqua}/>
-              <AddForm add = {(name,diachi,quyen)=>this.getDataNewUser(name,diachi,quyen)} trangthai={this.state.trangthai} trangThaiChinhsua={this.state.trangThaiChinhsua}/>
+              <AddForm add = {this.getDataNewUser}  trangThaiChinhsua={this.state.trangThaiChinhsua}/>
+              <EditForm trangthai={this.state.trangthaisua} edit = {this.state.userEditObject} objEditdone={this.handleEditForm}/>
             </div>
           </div>
         </div>
